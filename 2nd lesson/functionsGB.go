@@ -116,7 +116,7 @@ func startfizzbuzz2() {
 }
 func dosortbubble() {
 	var count, i, j, k int
-	var arr []int
+	var arr, arr2 []int
 
 	fmt.Printf("Введите количество рандомных чисел:")
 	fmt.Scanln(&count)
@@ -124,12 +124,16 @@ func dosortbubble() {
 		min := 1
 		max := 500
 		arr = append(arr, rand.Intn(max-min+1)+min)
+
 	}
-	fmt.Printf("Было: %v \n\n\n", arr)
+	arr2 = make([]int, count)
+	copy(arr2, arr)
+	//fmt.Printf("Было: %v \n\n\n", arr2)
+	//fmt.Printf("Было: %v \n\n\n", arr)
 	for k = 0; k < count-1; k++ {
 		for j = 0; j < count-1; j++ {
 			if arr[j] > arr[j+1] {
-				arr = swap(count, arr[j], arr[j+1], j, arr)
+				swap(arr[j], arr[j+1], j, arr)
 			}
 		}
 	}
@@ -140,12 +144,13 @@ func dosortbubble() {
 	}*/
 	//fmt.Print(strconv.Itoa(ele) + " ")
 	//}
+	fmt.Printf("Было: %v \n\n\n", arr2)
 	fmt.Printf("Стало: %v \n", arr)
 }
 
 //Меняет местами 2 смежных элемента массива
-func swap(count int, first int, second int, pos int, array []int) []int {
+func swap(first int, second int, pos int, array []int) {
 	array[pos] = second
 	array[pos+1] = first
-	return array
+
 }

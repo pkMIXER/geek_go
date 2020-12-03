@@ -82,3 +82,34 @@ func startsearch() {
 	}
 	fmt.Printf("Для поиска совершено %s действий(я)\n", strconv.Itoa(kolvodeistvii))
 }
+
+func startfizzbuzz() {
+	var i int
+	for i = 0; i <= 100; i++ {
+		fmt.Printf("Текущее число %s ", strconv.Itoa(i))
+		if i%15 == 0 {
+			fmt.Printf("FizzBuzz")
+		} else if i%3 == 0 {
+			fmt.Printf("Fizz")
+		} else if i%5 == 0 {
+			fmt.Printf("Buzz")
+		}
+		fmt.Printf("\n")
+	}
+}
+
+func startfizzbuzz2() {
+	var i int
+	var str string
+	for i = 0; i <= 100; i++ {
+		str = "Текущее число " + strconv.Itoa(i)
+		if i%3 == 0 {
+			str = str + " Fizz"
+		}
+		if i%5 == 0 {
+			str = str + " Buzz"
+		}
+		fmt.Printf(str + "\n")
+
+	}
+}

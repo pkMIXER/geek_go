@@ -8,7 +8,7 @@ import (
 func main() {
 	var e int
 	var err error
-	fmt.Print("Что вы хотите использовать?:\n 1. Калькулятор \n 2. Поиск простого числа\n ")
+	fmt.Print("Что вы хотите использовать?:\n 1. Калькулятор \n 2. Поиск простого числа\n 3.&4. FizzBuzz\n")
 	_, err = fmt.Scanln(&e)
 	if err != nil {
 		fmt.Printf("Введено не число")
@@ -19,5 +19,9 @@ func main() {
 		startcalc()
 	case 2:
 		startsearch()
+	case 3:
+		startfizzbuzz()
+	case 4:
+		startfizzbuzz2()
 	}
 }

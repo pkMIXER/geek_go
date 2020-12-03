@@ -3,57 +3,21 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 )
 
 func main() {
-	var a, b, res float32
-	var c, d int
-	var op string
+	var e int
 	var err error
-
-	fmt.Print("Добро пожаловать в калькулятор :) \n")
-	fmt.Print("Введите первое число: ")
-	_, err = fmt.Scanln(&a)
+	fmt.Print("Что вы хотите использовать?:\n 1. Калькулятор \n 2. Поиск простого числа\n ")
+	_, err = fmt.Scanln(&e)
 	if err != nil {
-		fmt.Printf("введено не число")
+		fmt.Printf("Введено не число")
 		os.Exit(0)
 	}
-
-	//fmt.Println(os.Stderr)
-
-	fmt.Print("Введите второе число: ")
-	_, err = fmt.Scanln(&b)
-	if err != nil {
-		fmt.Printf("введено не число")
-		os.Exit(0)
-	}
-
-	fmt.Print("Введите арифметическую операцию (+, -, *, /,%-взятие остатка.): ")
-	fmt.Scanln(&op)
-
-	if op == "%" {
-		c = int(a)
-		d = int(b)
-	}
-
-	switch op {
-	case "+":
-		res = a + b
-	case "-":
-		res = a - b
-	case "*":
-		res = a * b
-	case "/":
-		res = a / b
-	case "%":
-		fmt.Printf("Остаток от деления: %s", strconv.Itoa(c%d))
-		break
-	default:
-		fmt.Println("Операция выбрана неверно")
-		os.Exit(1)
-	}
-	if !(op == "%") {
-		fmt.Printf("Результат выполнения операции: %f\n", res)
+	switch e {
+	case 1:
+		startcalc()
+	case 2:
+		startsearch()
 	}
 }

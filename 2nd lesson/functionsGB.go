@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
 )
@@ -112,4 +113,39 @@ func startfizzbuzz2() {
 		fmt.Printf(str + "\n")
 
 	}
+}
+func dosortbubble() {
+	var count, i, j, k int
+	var arr []int
+
+	fmt.Printf("Введите количество рандомных чисел:")
+	fmt.Scanln(&count)
+	for i = 0; i < count; i++ {
+		min := 1
+		max := 500
+		arr = append(arr, rand.Intn(max-min+1)+min)
+	}
+	fmt.Printf("Было: %v \n\n\n", arr)
+	for k = 0; k < count-1; k++ {
+		for j = 0; j < count-1; j++ {
+			if arr[j] > arr[j+1] {
+				arr = swap(count, arr[j], arr[j+1], j, arr)
+			}
+		}
+	}
+
+	/*for j=1, ele := range arr {
+	if ele > arr[j]{
+		swap
+	}*/
+	//fmt.Print(strconv.Itoa(ele) + " ")
+	//}
+	fmt.Printf("Стало: %v \n", arr)
+}
+
+//Меняет местами 2 смежных элемента массива
+func swap(count int, first int, second int, pos int, array []int) []int {
+	array[pos] = second
+	array[pos+1] = first
+	return array
 }

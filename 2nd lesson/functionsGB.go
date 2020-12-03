@@ -154,3 +154,28 @@ func swap(first int, second int, pos int, array []int) {
 	array[pos+1] = first
 
 }
+func doinsertionsort() {
+	var count int
+	var arr, arr2 []int
+	fmt.Printf("Введите количество рандомных чисел:")
+	fmt.Scanln(&count)
+	for i := 0; i < count; i++ {
+		min := 1
+		max := 500
+		arr = append(arr, rand.Intn(max-min+1)+min)
+	}
+	arr2 = make([]int, count)
+	copy(arr2, arr)
+	var n = len(arr)
+	for i := 1; i < n; i++ {
+		j := i
+		for j > 0 {
+			if arr[j-1] > arr[j] {
+				arr[j-1], arr[j] = arr[j], arr[j-1]
+			}
+			j = j - 1
+		}
+	}
+	fmt.Printf("Было: %v \n\n\n", arr2)
+	fmt.Printf("Стало: %v \n", arr)
+}

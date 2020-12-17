@@ -39,14 +39,15 @@ func fibr(i int, fn map[int]int) int {
 }
 
 func main() {
-	var a int
+	var b uint
 	var err error
-	fmt.Print("Введите число для поиска числа фибоначи: ")
-	_, err = fmt.Scanln(&a)
-	if err != nil {
-		fmt.Printf("Введено не число")
+	fmt.Print("Введите количество для поиска числа фибоначи: ")
+	_, err = fmt.Scanln(&b)
+	if (err != nil) || (b == 0) {
+		fmt.Printf("Введено неверное количество")
 		os.Exit(0)
 	}
+	a := int(b)
 	for i := 0; i < a; i++ {
 		fmt.Printf("%d, ", fib(i))
 	}

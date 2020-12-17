@@ -6,11 +6,18 @@ import (
 )
 
 //Fibonacci recursive
-func fibr(n int) int {
-	if n < 2 {
-		return 1
+func fib(n int) int {
+	fn := make(map[int]int)
+	for i := 0; i <= n; i++ {
+		var f int
+		if i <= 2 {
+			f = 1
+		} else {
+			f = fn[i-1] + fn[i-2]
+		}
+		fn[i] = f
 	}
-	return fibr(n-2) + fibr(n-1)
+	return fn[n]
 }
 
 func main() {
@@ -23,6 +30,6 @@ func main() {
 		os.Exit(0)
 	}
 	for i := 0; i < a; i++ {
-		fmt.Printf("%d, ", fibr(i))
+		fmt.Printf("%d, ", fib(i))
 	}
 }

@@ -45,6 +45,10 @@ func startcalc() {
 	case "*":
 		res = a * b
 	case "/":
+		if b == 0 {
+			fmt.Printf("На ноль делить в этом калькуляторе нельзя.")
+			break
+		}
 		res = a / b
 	case "%":
 		fmt.Printf("Остаток от деления: %s", strconv.Itoa(c%d))
@@ -53,7 +57,7 @@ func startcalc() {
 		fmt.Println("Операция выбрана неверно")
 		os.Exit(1)
 	}
-	if !(op == "%") {
+	if !(op == "%") && !(b == 0) {
 		fmt.Printf("Результат выполнения операции: %f\n", res)
 	}
 }

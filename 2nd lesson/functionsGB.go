@@ -75,7 +75,7 @@ func startsearch() {
 	for i = 0; i <= a; i++ {
 		//fmt.Printf("Текущее число %s\n", strconv.Itoa(i))
 		founded = 0
-		for f = 1; f <= i; f++ {
+		for f = 2; f <= i; f++ {
 			if i%f == 0 {
 				founded++
 				kolvodeistvii++

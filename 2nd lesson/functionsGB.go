@@ -51,7 +51,7 @@ func startcalc() {
 		}
 		res = a / b
 	case "%":
-		fmt.Printf("Остаток от деления: %s", strconv.Itoa(c%d))
+		fmt.Printf("Остаток от деления: %d", c%d)
 		break
 	default:
 		fmt.Println("Операция выбрана неверно")

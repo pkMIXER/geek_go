@@ -109,10 +109,10 @@ func startfizzbuzz2() {
 	for i = 0; i <= 100; i++ {
 		str = "Текущее число " + strconv.Itoa(i)
 		if i%3 == 0 {
-			str = str + " Fizz"
+			str += "Fizz"
 		}
 		if i%5 == 0 {
-			str = str + " Buzz"
+			str += "Buzz"
 		}
 		fmt.Printf(str + "\n")
 

@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
 	"strconv"
+
+	"gopkg.in/yaml.v2"
 )
 
 func startcalc() {
@@ -184,21 +187,33 @@ func doinsertionsort() {
 	fmt.Printf("Было: %v \n\n\n", arr2)
 	fmt.Printf("Стало: %v \n", arr)
 }
+
+type ConfigStruct struct {
+	Port        int    `yaml:"port"`
+	DbURL       string `yaml:"db_url"`
+	JaegerURL   string `yaml:"jaeger_url"`
+	SentryURL   string `yaml:"sentry_url"`
+	KafkaBroker string `yaml:"kafka_broker"`
+	SomeAppID   string `yaml:"some_app_id"`
+	SomeAppKey  string `yaml:"some_app_key"`
+}
+
 func readconf() {
 	// слайс для чтения конфига
 	buffer := make([]byte, 2000)
 
 	// Проверяем, что файл существует
-	if _, err := os.Stat("./config.yaml"); err != nil {
+	if _, err := os.Stat("./conf.yaml"); err != nil {
 		log.Fatalf("Конфиг файл не существует: %v", err)
 	}
 
 	//Открываем конфиг с чеком на ошибки
-	file, err := os.Open("./config.yaml")
+	file, err := os.Open("./conf.yaml")
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//Читаем файл в буфер зачем-то, пока непонятно зачем :)
+	_, err = file.Read(buffer)
 	//Задаем закрытие файла в случае падения\завершение программы
 	defer func() {
 		err = file.Close()
@@ -207,5 +222,13 @@ func readconf() {
 			log.Fatal(err)
 		}
 	}()
-	_, err = file.Read(buffer)
+
+	confiFile, err := ioutil.ReadFile("./conf.yaml")
+
+	appconfig := ConfigStruct{}
+	err = yaml.Unmarshal(confiFile, &appconfig)
+	if err != nil {
+		log.Printf("Не могу декодировать yaml-файл в структуру: %v", err)
+	}
+	fmt.Printf("Configfile:\n %+v\n", appconfig)
 }

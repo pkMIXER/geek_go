@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"os"
 	"strconv"
@@ -182,4 +183,29 @@ func doinsertionsort() {
 	}
 	fmt.Printf("Было: %v \n\n\n", arr2)
 	fmt.Printf("Стало: %v \n", arr)
+}
+func readconf() {
+	// слайс для чтения конфига
+	buffer := make([]byte, 2000)
+
+	// Проверяем, что файл существует
+	if _, err := os.Stat("./config.yaml"); err != nil {
+		log.Fatalf("Конфиг файл не существует: %v", err)
+	}
+
+	//Открываем конфиг с чеком на ошибки
+	file, err := os.Open("./config.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	//Задаем закрытие файла в случае падения\завершение программы
+	defer func() {
+		err = file.Close()
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+	_, err = file.Read(buffer)
 }

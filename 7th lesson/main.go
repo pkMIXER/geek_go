@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 )
 
 var (
@@ -15,6 +16,8 @@ func main() {
 	flag.Parse()
 	var e int
 	var err error
+
+	fmt.Print("Запущено на: " + runtime.GOOS + "\n")
 	//Проверяем задан ли флаг программы
 	if *prognum != 0 {
 		if *prognum < 1 || *prognum > 7 {

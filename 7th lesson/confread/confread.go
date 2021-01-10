@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -20,10 +21,13 @@ type ConfigStruct struct {
 	SomeAppKey  string `yaml:"some_app_key"`
 }
 
-func checkconfurls(urlstring string) {
+func checkconfurls(urlstring, prefix string) {
 	_, err := url.ParseRequestURI(urlstring)
 	if err != nil {
 		fmt.Print(err)
+	}
+	if !strings.HasPrefix(urlstring, prefix) {
+		fmt.Printf("Не задан префикс протокола:%v\n", urlstring)
 	}
 }
 func ReadConf() {
@@ -58,9 +62,9 @@ func ReadConf() {
 	if err != nil {
 		log.Printf("Не могу декодировать yaml-файл в структуру: %v", err)
 	}
-	checkconfurls(appconfig.JaegerURL)
-	checkconfurls(appconfig.SentryURL)
-	checkconfurls(appconfig.DbURL)
+	checkconfurls(appconfig.JaegerURL, "http")
+	checkconfurls(appconfig.SentryURL, "http")
+	checkconfurls(appconfig.DbURL, "postgres")
 
 	fmt.Printf("\nConfigfile:\n %+v\n", appconfig)
 }

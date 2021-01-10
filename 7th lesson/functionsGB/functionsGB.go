@@ -1,17 +1,13 @@
-package main
+package functionsGB
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"math/rand"
 	"os"
 	"strconv"
-
-	"gopkg.in/yaml.v2"
 )
 
-func startcalc() {
+func Startcalc() {
 	var a, b, res float32
 	var c, d int
 	var op string
@@ -65,7 +61,7 @@ func startcalc() {
 		fmt.Printf("Результат выполнения операции: %f\n", res)
 	}
 }
-func startsearch() {
+func Startsearch() {
 	var a, i, f, founded, kolvodeistvii int
 	var err error
 	kolvodeistvii = 0
@@ -92,7 +88,7 @@ func startsearch() {
 	fmt.Printf("Для поиска совершено %s действий(я)\n", strconv.Itoa(kolvodeistvii))
 }
 
-func startfizzbuzz() {
+func Startfizzbuzz() {
 	var i int
 	for i = 0; i <= 100; i++ {
 		fmt.Printf("Текущее число %s ", strconv.Itoa(i))
@@ -107,7 +103,7 @@ func startfizzbuzz() {
 	}
 }
 
-func startfizzbuzz2() {
+func Startfizzbuzz2() {
 	var i int
 	var str string
 	for i = 0; i <= 100; i++ {
@@ -122,7 +118,7 @@ func startfizzbuzz2() {
 
 	}
 }
-func dosortbubble() {
+func Dosortbubble() {
 	var count, i, j, k int
 	var arr, arr2 []int
 
@@ -162,7 +158,7 @@ func swap(first int, second int, pos int, array []int) {
 	array[pos+1] = first
 
 }
-func doinsertionsort() {
+func Doinsertionsort() {
 	var count int
 	var arr, arr2 []int
 	fmt.Printf("Введите количество рандомных чисел:")
@@ -186,49 +182,4 @@ func doinsertionsort() {
 	}
 	fmt.Printf("Было: %v \n\n\n", arr2)
 	fmt.Printf("Стало: %v \n", arr)
-}
-
-type ConfigStruct struct {
-	Port        int    `yaml:"port"`
-	DbURL       string `yaml:"db_url"`
-	JaegerURL   string `yaml:"jaeger_url"`
-	SentryURL   string `yaml:"sentry_url"`
-	KafkaBroker string `yaml:"kafka_broker"`
-	SomeAppID   string `yaml:"some_app_id"`
-	SomeAppKey  string `yaml:"some_app_key"`
-}
-
-func readconf() {
-	// слайс для чтения конфига
-	buffer := make([]byte, 2000)
-
-	// Проверяем, что файл существует
-	if _, err := os.Stat("./conf.yaml"); err != nil {
-		log.Fatalf("Конфиг файл не существует: %v", err)
-	}
-
-	//Открываем конфиг с чеком на ошибки
-	file, err := os.Open("./conf.yaml")
-	if err != nil {
-		log.Fatal(err)
-	}
-	//Читаем файл в буфер зачем-то, пока непонятно зачем :)
-	_, err = file.Read(buffer)
-	//Задаем закрытие файла в случае падения\завершение программы
-	defer func() {
-		err = file.Close()
-
-		if err != nil {
-			log.Fatal(err)
-		}
-	}()
-
-	confiFile, err := ioutil.ReadFile("./conf.yaml")
-
-	appconfig := ConfigStruct{}
-	err = yaml.Unmarshal(confiFile, &appconfig)
-	if err != nil {
-		log.Printf("Не могу декодировать yaml-файл в структуру: %v", err)
-	}
-	fmt.Printf("Configfile:\n %+v\n", appconfig)
 }

@@ -6,6 +6,9 @@ import (
 	"log"
 	"os"
 	"runtime"
+
+	"github.com/pkMIXER/geek_go/7th_lesson/confread"
+	"github.com/pkMIXER/geek_go/7th_lesson/functionsGB"
 )
 
 var (
@@ -41,19 +44,19 @@ func main() {
 	}
 	switch e {
 	case 1:
-		startcalc()
+		functionsGB.Startcalc()
 	case 2:
-		startsearch()
+		functionsGB.Startsearch()
 	case 3:
-		startfizzbuzz()
+		functionsGB.Startfizzbuzz()
 	case 4:
-		startfizzbuzz2()
+		functionsGB.Startfizzbuzz2()
 	case 5:
-		dosortbubble()
+		functionsGB.Dosortbubble()
 	case 6:
-		doinsertionsort()
+		functionsGB.Doinsertionsort()
 	case 7:
-		readconf()
+		confread.ReadConf()
 	}
 
 }
